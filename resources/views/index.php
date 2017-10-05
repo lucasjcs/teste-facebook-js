@@ -12,7 +12,7 @@
         // initialize and setup facebook js sdk
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : '219911391845666',//Change this
+                appId      : '1461995987171397',//Change this
                 xfbml      : true,
                 version    : 'v2.10'
             });
@@ -39,6 +39,7 @@
                     console.log('you are connected');
                     console.log("resposta do login:", response);
                     console.log("token", response.authResponse.accessToken);
+                    getFoto();
                 } else {
                     console.log('you are not connected');
                 }
