@@ -12,7 +12,7 @@
         // initialize and setup facebook js sdk
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : '219911391845666',
+                appId      : '219911391845666',//Change this
                 xfbml      : true,
                 version    : 'v2.10'
             });
@@ -37,7 +37,8 @@
             FB.login(function(response) {
                 if (response.status === 'connected') {
                     console.log('you are connected');
-                    getFoto();
+                    console.log("resposta do login:", response);
+                    console.log("token", response.authResponse.accessToken);
                 } else {
                     console.log('you are not connected');
                 }
@@ -45,21 +46,11 @@
         }
 
         function getFoto() {
-            FB.api("/me/picture?type=large", function(response) {
+            FB.api("/me?fields=name, picture.height(700)", function(response) {
 
-                console.log(response.data.url);
+                console.log("resposta: ", response);
                 $(document).ready(function () {
-                    $('#picture').val(response.data.url);
-                    getInfo();
-                });
-
-            });
-        }
-
-        // getting basic user info
-        function getInfo() {
-            FB.api('/me', 'GET', {fields: 'name'}, function(response) {
-                $(document).ready(function () {
+                    $('#picture').val(response.picture.data.url);
                     $('#name').val(response.name);
                     $('#formulario').submit();
                 });
